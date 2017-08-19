@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Link } from 'react-router-dom'
 import * as ActionsHeader from '../../actions/Header'
 import s from './style.pcss'
 
@@ -21,6 +22,12 @@ class Category extends PureComponent {
       <div className={s.category}>
         <div className={s.tabs}>
           {types}
+        </div>
+        <div className={s.items}>
+          <div className={s.item}>
+            <Link to=''>МКУ ДО "Центр по физической культуре, спорту и здоровьесбережению" г. Перми</Link>
+            <span>614010, Пермский край, г. Пермь, ул. Чкалова, 48</span>
+          </div>
         </div>
       </div>
     )
