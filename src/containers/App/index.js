@@ -3,12 +3,11 @@ import { withRouter, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from '../../actions/App'
-
 import s from './style.pcss'
 
 import Header from '../Header'
 import Home from '../Home'
-import Contact from '../Contact'
+import Category from '../Category'
 
 class App extends PureComponent {
   render () {
@@ -17,7 +16,7 @@ class App extends PureComponent {
         <Header/>
         <div className={s.content}>
           <Route path='/' exact component={Home}/>
-          <Route path='/contact' component={Contact}/>
+          <Route path='/:category' exact component={Category}/>
         </div>
       </div>
     )

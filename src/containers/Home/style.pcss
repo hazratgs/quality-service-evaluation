@@ -1,7 +1,73 @@
-.foo {
-  background-color: red;
+@import "../../public/css/variables.pcss";
+
+.home {
+  padding: 0;
 }
 
-.bar {
-  background-color: red;
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+
+  & .item {
+    flex: 0 0 calc(50% - 0.5px);
+    height: 280px;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 0.5px;
+
+    &:nth-child(2n) {
+      margin-left: 0.5px;
+      margin-right: 0;
+    }
+
+    &:hover {
+      &:after {
+        opacity: 0.5;
+      }
+    }
+
+    &:after {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      content: '';
+      background-color: var(--active);
+      @apply --transition;
+    }
+
+    & .wrapper {
+      position: relative;
+      z-index: 2;
+    }
+
+    & svg {
+      display: block;
+      width: 100px;
+      height: 100px;
+      position: relative;
+      margin: auto;
+      fill: #fff;
+    }
+
+    & h4 {
+      margin: 20px 0 0;
+      display: block;
+      font-family: var(--serif);
+      text-align: center;
+      font-size: 32px;
+      position: relative;
+      color: #fff;
+      @apply --font-smooth;
+    }
+  }
 }
