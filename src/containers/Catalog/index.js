@@ -6,28 +6,49 @@ import * as ActionsHeader from '../../actions/Header'
 import s from './style.pcss'
 
 class Catalog extends PureComponent {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      category: null
+    }
+  }
+
   componentWillMount () {
-    this.props.setTitle('Образовательные учреждения')
+    const currentCategory = this.props.state.categories.find(item => this.props.match.params.category === item._name)
+    if (currentCategory) {
+      this.setState({category: currentCategory})
+
+      // Устанавливаем заголовок
+      this.props.setTitle(currentCategory.title)
+    }
   }
 
   render () {
-    const types = this.props.state.types.map(item => (
-      <label className={s.item}>
+    if (this.state.category === null) {
+      return <div>Загрузка...</div>
+    }
+
+    const types = this.props.state.types.filter(item => this.state.category.name === item.category).map((item, index) => (
+      <label key={index} className={s.item}>
         <input type='checkbox'/>
-        <span>{item}</span>
+        <span>{item.type}</span>
       </label>
     ))
 
+    const items = this.props.state.items.filter(item => this.state.category.name === item.category)
+      .map(item =>
+        <div className={s.item}>
+          <Link to=''>{item.name}</Link>
+        </div>
+      )
     return (
       <div className={s.category}>
         <div className={s.tabs}>
           {types}
         </div>
         <div className={s.items}>
-          <div className={s.item}>
-            <Link to=''>МКУ ДО "Центр по физической культуре, спорту и здоровьесбережению" г. Перми</Link>
-            <span>614010, Пермский край, г. Пермь, ул. Чкалова, 48</span>
-          </div>
+          {items}
         </div>
       </div>
     )

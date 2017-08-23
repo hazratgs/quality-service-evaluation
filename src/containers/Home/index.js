@@ -3,33 +3,49 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ActionsHeader from '../../actions/Header'
 import { Link } from 'react-router-dom'
-import Theater from '../../public/svg/theater.svg'
-import Education from '../../public/svg/education.svg'
-import EducationImage from '../../public/img/education.jpg'
-import TheaterImage from '../../public/img/theater.jpg'
 import s from './style.pcss'
+
+import Education from '../../public/svg/education.svg'
+import '../../public/img/education.jpg'
+
+import Culture from '../../public/svg/culture.svg'
+import '../../public/img/culture.jpg'
 
 class Home extends PureComponent {
   componentWillMount () {
     this.props.setTitle('Оценка качества услуг')
   }
 
+  getContentCategory (category) {
+    switch (category) {
+      case 'education':
+        return { svg: <Education/>, image: '/img/education.jpg' }
+
+      case 'culture':
+        return { svg: <Culture/>, image: '/img/culture.jpg' }
+
+      default:
+        return { svg: null, image: null }
+    }
+  }
+
   render () {
+    const categories = this.props.categories.map((item, index) => {
+      const content = this.getContentCategory(item._name)
+      return (
+        <Link key={index} to={`/${item._name}`} className={s.item} style={{backgroundImage: `url(${content.image})`}}>
+          <div className={s.wrapper}>
+            {content.svg}
+            <h4>{item.name}</h4>
+          </div>
+        </Link>
+      )
+    })
+
     return (
       <div className={s.home}>
         <div className={s.tabs}>
-          <Link to='/education' className={s.item} style={{backgroundImage: `url(${EducationImage})`}}>
-            <div className={s.wrapper}>
-              <Education/>
-              <h4>Образование</h4>
-            </div>
-          </Link>
-          <Link to='/theater' className={s.item} style={{backgroundImage: `url(${TheaterImage})`}}>
-            <div className={s.wrapper}>
-              <Theater/>
-              <h4>Культура</h4>
-            </div>
-          </Link>
+          {categories}
         </div>
       </div>
     )
@@ -38,7 +54,7 @@ class Home extends PureComponent {
 
 export default connect(
   state => ({
-    state: state
+    categories: state.Catalog.categories
   }),
   dispatch => ({
     setTitle: bindActionCreators(ActionsHeader.setTitle, dispatch)

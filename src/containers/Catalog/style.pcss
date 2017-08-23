@@ -8,9 +8,22 @@
   padding: 20px 0;
 
   & .item {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+
     & a {
-      font-weight: bold;
-      color: var(--active);
+      display: inline;
+      border-bottom: 1px solid;
+      color: #377ab3;
+      text-decoration: none;
+      font-family: var(--text);
+      font-size: 18px;
+      line-height: 28px;
+
+      &:hover {
+        color: red;
+      }
     }
   }
 }

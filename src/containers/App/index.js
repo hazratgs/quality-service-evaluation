@@ -21,7 +21,7 @@ class App extends PureComponent {
     // Поиск категорий
     const usedCategories = []
     const categories = list.filter(item => usedCategories.includes(item.category) ? false : usedCategories.push(item.category))
-      .map(item => item.category)
+      .map(item => this.props.projectData[item.category])
     this.props.actionsCatalog.setCategories(categories)
 
     // Поиск типов
@@ -46,7 +46,8 @@ class App extends PureComponent {
 
 export default withRouter(connect(
   state => ({
-    state: state.App
+    state: state.App,
+    projectData: state.Catalog.projectData
   }),
   dispatch => ({
     actions: bindActionCreators(Actions, dispatch),
