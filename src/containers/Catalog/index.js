@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import * as ActionsHeader from '../../actions/Header'
 import s from './style.pcss'
 
-class Category extends PureComponent {
+class Catalog extends PureComponent {
   componentWillMount () {
     this.props.setTitle('Образовательные учреждения')
   }
@@ -36,9 +36,9 @@ class Category extends PureComponent {
 
 export default connect(
   state => ({
-    state: state.Category
+    state: state.Catalog
   }),
   dispatch => ({
     setTitle: bindActionCreators(ActionsHeader.setTitle, dispatch)
   })
-)(Category)
+)(Catalog)
