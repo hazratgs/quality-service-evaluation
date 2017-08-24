@@ -16,15 +16,20 @@ class Header extends PureComponent {
   render () {
     return (
       <div className={s.header}>
-        <h1>{this.props.state.title}</h1>
-        <div className={s.search}>
-          <input
-            defaultValue={this.state.query}
-            onChange={(e) => this.setState({query: e.target.value})}
-            placeholder='Введите название учреждения'
-          />
-          <SearchIcon/>
-        </div>
+        <h1 className={this.props.state.smallFontSize ? s.small : ''}>{this.props.state.title}</h1>
+        {this.props.state.searchPanel
+          ? (
+            <div className={s.search}>
+              <input
+                defaultValue={this.state.query}
+                onChange={(e) => this.setState({query: e.target.value})}
+                placeholder='Введите название учреждения'
+              />
+              <SearchIcon/>
+            </div>
+          )
+          : null
+        }
       </div>
     )
   }

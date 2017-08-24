@@ -4,11 +4,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from '../../actions/App'
 import * as ActionsCatalog from '../../actions/Catalog'
+import md5 from 'md5'
 import s from './style.pcss'
 
 import Header from '../Header'
 import Home from '../Home'
 import Catalog from '../Catalog'
+import Agency from '../Agency'
+
 import * as list from '../../public/db.json'
 
 class App extends PureComponent {
@@ -16,7 +19,7 @@ class App extends PureComponent {
     super(props)
 
     // Данные
-    this.props.actionsCatalog.setCatalog(list)
+    this.props.actionsCatalog.setCatalog(list.map(item => ({ ...item, _name: md5(item.name) })))
 
     // Поиск категорий
     const usedCategories = []
@@ -38,6 +41,7 @@ class App extends PureComponent {
         <div className={s.content}>
           <Route path='/' exact component={Home}/>
           <Route path='/:category' exact component={Catalog}/>
+          <Route path='/:category/:agency' exact component={Agency}/>
         </div>
       </div>
     )

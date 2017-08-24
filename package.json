@@ -55,8 +55,11 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
+    "md5": "^2.2.1",
+    "moment": "^2.18.1",
     "normalize.css": "^7.0.0",
     "react": "^15.5.4",
+    "react-datepicker": "^0.53.0",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",

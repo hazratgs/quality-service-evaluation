@@ -29,19 +29,25 @@ class Catalog extends PureComponent {
       return <div>Загрузка...</div>
     }
 
-    const types = this.props.state.types.filter(item => this.state.category.name === item.category).map((item, index) => (
+    const types = this.props.state.types.filter(item => this.state.category.name === item.category).map((item, index) =>
       <label key={index} className={s.item}>
         <input type='checkbox'/>
         <span>{item.type}</span>
       </label>
-    ))
+    )
 
     const items = this.props.state.items.filter(item => this.state.category.name === item.category)
-      .map(item =>
-        <div className={s.item}>
-          <Link to=''>{item.name}</Link>
-        </div>
-      )
+      .map((item, index) => {
+        const nameSplit = item.name.split('«')
+        const name = nameSplit.filter((item, i) => i !== 0).join(' ').split('»').map(item => item)
+        const type = nameSplit[0]
+        return (
+          <div key={index} className={s.item}>
+            <Link to={this.props.match.url + '/' + item._name}>{name}</Link>
+            <span>{type}</span>
+          </div>
+        )
+      })
     return (
       <div className={s.category}>
         <div className={s.tabs}>

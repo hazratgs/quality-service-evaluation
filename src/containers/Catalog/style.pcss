@@ -12,7 +12,12 @@
     padding-bottom: 15px;
     margin-bottom: 15px;
 
+    &:last-child {
+      border-bottom: 0;
+    }
+
     & a {
+      font-weight: bold;
       display: inline;
       border-bottom: 1px solid;
       color: #377ab3;
@@ -24,6 +29,14 @@
       &:hover {
         color: red;
       }
+    }
+
+    & span {
+      display: block;
+      padding: 5px 0;
+      font-size: 13px;
+      color: #666;
+      font-family: var(--text);
     }
   }
 }
