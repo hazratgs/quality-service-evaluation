@@ -19,6 +19,8 @@ class Agency extends PureComponent {
   }
 
   componentWillMount () {
+    window.scrollTo(0, 0)
+
     // Скрываем поисковую панель
     this.props.actionsHeader.changeSearchPanel(false)
     this.props.actionsHeader.setSmallFontSizeHeader(true)
@@ -51,6 +53,7 @@ class Agency extends PureComponent {
       return <div>Загрузка...</div>
     }
 
+    const items = this.state.issues.map((item, index) => <Item key={index} value={item} />)
     return (
       <div className={s.block}>
         <div className={s.content}>
@@ -63,17 +66,28 @@ class Agency extends PureComponent {
                 onChange={(value) => this.setState({date: value})}
               />
             </div>
+            <div className={s.issues}>
+              {items}
+            </div>
           </div>
         </div>
         <div className={s.aside}>
           <div className={s.wrapper}>
-
           </div>
         </div>
       </div>
     )
   }
 }
+
+const Item = ({value}) => (
+  <div className={s.item}>
+    <div className={s.content}>
+      <p>{value}</p>
+    </div>
+    <div className={s.slider}></div>
+  </div>
+)
 
 export default connect(
   state => ({
