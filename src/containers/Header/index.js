@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from '../../actions/Header'
+import BackButton from '../../components/BackButton'
 import SearchIcon from '../../public/svg/search.svg'
 import s from './style.pcss'
 
@@ -16,6 +17,7 @@ class Header extends PureComponent {
   render () {
     return (
       <div className={s.header}>
+        {window.location.pathname !== '/' ? <BackButton/> : null}
         <h1 className={this.props.state.smallFontSize ? s.small : ''}>{this.props.state.title}</h1>
         {this.props.state.searchPanel
           ? (

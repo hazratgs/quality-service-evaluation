@@ -28,7 +28,6 @@ class Agency extends PureComponent {
       this.setState({agency: agency[0]})
       this.props.actionsHeader.setTitle(agency[0].name)
 
-
       if (this.props.issues.hasOwnProperty(agency[0].type)) {
 
       }
