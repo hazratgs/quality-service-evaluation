@@ -13,6 +13,7 @@ class Agency extends PureComponent {
 
     this.state = {
       agency: null,
+      issues: [],
       date: moment()
     }
   }
@@ -24,14 +25,18 @@ class Agency extends PureComponent {
 
     // Находим агенство
     const agency = this.props.items.filter(item => item._name === this.props.match.params.agency)
+    console.log(agency)
     if (agency) {
       this.setState({agency: agency[0]})
       this.props.actionsHeader.setTitle(agency[0].name)
 
+      // Проверка наличия собственных вопросов типа
       if (this.props.issues.hasOwnProperty(agency[0].type)) {
-
+        this.setState({issues: this.props.issues[agency[0].type]})
+      } else if (this.props.issues.hasOwnProperty(agency[0].category)) {
+        // Вопросы категории
+        this.setState({issues: this.props.issues[agency[0].category]})
       }
-      // const findIssues = this.props.issues
     }
   }
 
