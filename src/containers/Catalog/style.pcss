@@ -4,6 +4,41 @@
 
 }
 
+.tabs {
+
+  & .item {
+    margin-right: 1px;
+    display: inline-block;
+    cursor: pointer;
+
+    & input {
+      position: absolute;
+      visibility: hidden;
+
+      &:checked + span {
+        color: #fff;
+        background-color: #a5416f;
+      }
+    }
+
+    & span {
+      font-family: var(--text);
+      color: #000;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 1px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      display: inline-block;
+
+      &:hover {
+        background-color: #eee;
+      }
+    }
+
+  }
+}
+
 .items {
   padding: 20px 0;
 

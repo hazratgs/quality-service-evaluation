@@ -10,7 +10,8 @@ class Catalog extends PureComponent {
     super(props)
 
     this.state = {
-      category: null
+      category: null,
+      checked: []
     }
   }
 
@@ -24,6 +25,14 @@ class Catalog extends PureComponent {
     }
   }
 
+  checkedTypes (type) {
+    if (!this.state.checked.includes(type)) {
+      this.setState(state => ({checked: [...state.checked, type]}))
+    } else {
+      this.setState(state => ({checked: state.checked.filter(item => item !== type)}))
+    }
+  }
+
   render () {
     if (this.state.category === null) {
       return <div>Загрузка...</div>
@@ -31,12 +40,18 @@ class Catalog extends PureComponent {
 
     const types = this.props.state.types.filter(item => this.state.category.name === item.category).map((item, index) =>
       <label key={index} className={s.item}>
-        <input type='checkbox'/>
+        <input
+          name='type'
+          type='checkbox'
+          onClick={() => this.checkedTypes(item.type)}
+          checked={this.state.checked.includes(item.type)}
+        />
         <span>{item.type}</span>
       </label>
     )
 
     const items = this.props.state.items.filter(item => this.state.category.name === item.category)
+      .filter(item => !this.state.checked.length ? true : this.state.checked.includes(item.type))
       .map((item, index) => {
         const nameSplit = item.name.split('«')
         const name = nameSplit.filter((item, i) => i !== 0).join(' ').split('»').map(item => item)
