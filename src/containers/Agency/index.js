@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import * as ActionsHeader from '../../actions/Header'
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
+import Button from '../../components/Button'
 import 'react-datepicker/dist/react-datepicker.css'
 import s from './style.pcss'
 
@@ -48,6 +49,10 @@ class Agency extends PureComponent {
     this.props.actionsHeader.setSmallFontSizeHeader(false)
   }
 
+  send () {
+    console.log('hello')
+  }
+
   render () {
     if (!this.state.agency) {
       return <div>Загрузка...</div>
@@ -68,6 +73,9 @@ class Agency extends PureComponent {
             </div>
             <div className={s.issues}>
               {items}
+            </div>
+            <div className={s.button}>
+              <Button handle={this.send}/>
             </div>
           </div>
         </div>
