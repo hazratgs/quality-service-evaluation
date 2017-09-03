@@ -5,6 +5,7 @@ import * as ActionsHeader from '../../actions/Header'
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
 import Button from '../../components/Button'
+import VoteButtons from '../../components/VoteButtons'
 import 'react-datepicker/dist/react-datepicker.css'
 import s from './style.pcss'
 
@@ -93,7 +94,9 @@ const Item = ({value}) => (
     <div className={s.content}>
       <p>{value}</p>
     </div>
-    <div className={s.slider}></div>
+    <div className={s.buttons}>
+      <VoteButtons/>
+    </div>
   </div>
 )
 
